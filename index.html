@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>اختبار الوحدة الأولى · Unit 1 Exam</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f6fc;--card:#fff;--ink:#14213d;--mut:#5b6785;--line:#dbe3f3;--pri:#1d4ba8;--on:#fff;--acc:#d9480f;--okb:#e2f6ee;--badb:#fdeaea;--sel:#e8effc;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1424;--card:#171f36;--ink:#e8edf9;--mut:#9aa7c7;--line:#2a3555;--pri:#7ea6ff;--on:#0e1424;--acc:#ff8a57;--okb:#123326;--badb:#3a1c1c;--sel:#1f2b4d}}
+:root[data-theme="dark"]{--bg:#0e1424;--card:#171f36;--ink:#e8edf9;--mut:#9aa7c7;--line:#2a3555;--pri:#7ea6ff;--on:#0e1424;--acc:#ff8a57;--okb:#123326;--badb:#3a1c1c;--sel:#1f2b4d}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 Cairo,'Segoe UI',Tahoma,system-ui,sans-serif}
+button{font:inherit;cursor:pointer}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--card);border-bottom:1px solid var(--line)}
+.bar{flex:1;height:8px;background:var(--line);border-radius:9px;overflow:hidden}
+#pb{display:block;height:100%;width:0;background:var(--acc);transition:width .3s}
+#pl{font-size:13px;color:var(--mut);white-space:nowrap}
+#lg{border:1.5px solid var(--pri);color:var(--pri);background:none;border-radius:20px;padding:2px 14px;font-weight:700}
+main{max-width:760px;margin:0 auto;padding:16px}
+.hero{background:linear-gradient(135deg,#1d4ba8,#0f2e6e);color:#fff;border-radius:20px;padding:24px 20px;margin-bottom:16px}
+.hero h1{margin:0 0 4px;font-size:24px;line-height:1.5}
+.hero p{margin:0 0 12px;opacity:.9}
+.chip,.mk{background:#d9480f;color:#fff;border-radius:20px;padding:2px 14px;font-weight:700;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:16px}
+.card h2{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;font-size:17px;margin:0 0 8px;color:var(--pri)}
+.q{padding:12px 0;border-top:1px dashed var(--line)}
+.q p{margin:0 0 8px}
+.q.ok{background:var(--okb);border-radius:12px;padding:12px;margin:6px 0;border:0}
+.q.bad{background:var(--badb);border-radius:12px;padding:12px;margin:6px 0;border:0}
+.opts{display:grid;gap:8px;grid-template-columns:1fr 1fr}
+@media(max-width:520px){.opts{grid-template-columns:1fr}}
+.o{position:relative;display:flex;gap:8px;align-items:center;border:1.5px solid var(--line);border-radius:12px;padding:8px 10px;cursor:pointer;background:var(--card)}
+.o input{position:absolute;opacity:0}
+.o:focus-within{outline:2px solid var(--pri)}
+.k{width:26px;height:26px;border-radius:50%;background:var(--sel);color:var(--pri);display:grid;place-items:center;font-weight:700;font-size:13px;flex:none}
+.o.on{border-color:var(--pri);background:var(--sel)}
+.o.on .k{background:var(--pri);color:var(--on)}
+.tf{display:flex;gap:8px;margin-bottom:8px}
+.tf button{width:56px;height:40px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font-size:20px}
+.tf .on{border-color:var(--pri);background:var(--sel)}
+.txt{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:8px 12px}
+.txt:focus{outline:2px solid var(--pri);border-color:transparent}
+textarea.txt{min-height:150px;resize:vertical}
+.fb{margin-top:8px;font-size:14px}
+.md{margin-top:12px;background:var(--sel);border-radius:12px;padding:12px;font-size:15px}
+.go{display:block;width:100%;background:var(--pri);color:var(--on);border:0;border-radius:14px;padding:14px;font-size:17px;font-weight:800}
+.res{text-align:center}
+.big{font-size:56px;font-weight:800;color:var(--acc);line-height:1.2}
+.big small{font-size:22px;color:var(--mut)}
+.mut{color:var(--mut);font-size:14px}
+.ctr{text-align:center}
+</style>
+</head>
+<body>
+<header class="top"><div class="bar"><i id="pb"></i></div><span id="pl"></span><button id="lg"></button></header>
+<main><div id="app"></div></main>
+<script>
+const K={ar:['أ','ب','ج','د'],en:['A','B','C','D']};
+const A1=[1,2,2,1,0,1,2,1],T2=[0,0,1,0];
+const R2=[/تعبير|expression/,/دائم|حتي|غياب|بدون|كل الاحوال|always|even|regardless/,0,/اذن|موافق|تصريح|استئذان|permission|consent|approv/];
+const R3=[/معرف|knowledge/,/شبك.*اجتماع|social.*network/,/مضلل|misinformation|disinformation/,/تسريب|leak/];
+const D={
+ar:{dir:'rtl',btn:'English',qn:'س',title:'اختبار الوحدة الأولى — دراسة المعلومات',sub:'البرمجة والذكاء الاصطناعي · الصف الأول البكالوريا · 2026/2027',total:'المجموع: 40 درجة',credit:'المحتوى: أ/ أحمد تامر صالح',
+secs:['السؤال الأول · اختر الإجابة الصحيحة','السؤال الثاني · ضع (✓) أو (✗) مع تصحيح الخطأ إن وجد','السؤال الثالث · أكمل الفراغات','السؤال الرابع · سؤال مقالي'],
+mk:['16 درجة (2 لكل سؤال)','8 درجات (2 لكل سؤال)','8 درجات (2 لكل فراغ)','8 درجات'],
+q1:[['حقائق تُمثل بالأرقام أو الأحرف أو الرموز تسمى:',['المعلومات','البيانات','المعرفة','الوسائط']],
+['الخاصية التي تعني «بمجرد إنشاء المعلومات لا يمكن محوها بالكامل» هي:',['الانتشار','قابلية التكرار','الاستمرارية','الثقافة الإعلامية']],
+['محرك أقراص USB يُصنَّف ضمن وسائط:',['التعبير','النقل','التسجيل','الجماهيري']],
+['المعلومات التي تحصل عليها من طرف ثالث كالكتب والصحف تسمى:',['أولية','ثانوية','مضللة','خام']],
+['معلومات خط الطول والعرض المضمنة في صور الهاتف الذكي تسمى:',['العلامة الجغرافية','التنمر الإلكتروني','انتحال الشخصية','التخزين السحابي']],
+['الانغماس المفرط في الإنترنت لدرجة تعطيل حياتك اليومية يسمى:',['الجريمة الإلكترونية','إدمان الإنترنت','الهندسة الاجتماعية','التسريب']],
+['قيام شخص بانتحال شخصية فرد أو مؤسسة لسرقة كلمات المرور يسمى:',['تسريب المعلومات','التنمر الإلكتروني','انتحال الشخصية','الانتشار']],
+['تفسير معلومات الوسائط بدقة هو تعريف:',['أخلاقيات المعلومات','الثقافة الإعلامية','التحقق المتبادل','قابلية التكرار']]],
+q2:['الصور والنصوص من وسائل النقل.','أخلاقيات المعلومات تلزمنا فقط عند وجود قوانين.','المعلومات الثانوية قد تختلف عن الأصلية لذلك نستخدم التحقق المتبادل.','لا بأس بمشاركة صور الآخرين دون إذنهم إذا كانت متاحة على الإنترنت.'],
+fix:['وسائل التعبير','أخلاقيات المعلومات تلزمنا دائمًا حتى في غياب القوانين',0,'يجب الحصول على إذن أصحاب الصور قبل مشاركتها'],
+q3:[['_____ هي المعلومات التي تم تحليلها وتنظيمها بشكل منهجي لحل المشكلات.','المعرفة'],['_____ خدمات توفر منصات للأفراد للتواصل مع بعضهم البعض على الإنترنت.','خدمات الشبكات الاجتماعية'],['_____ معلومات كاذبة تُنشر عمدًا أو شائعات لا أساس لها.','المعلومات المضللة'],['_____ الكشف عن معلومات شخصية يجب أن تظل سرية لطرف ثالث.','تسريب المعلومات الشخصية']],
+q4:'قررت مدرستك نشر صور الطلاب في الرحلات على صفحتها الرسمية. ناقش هذا القرار مستخدمًا ثلاثة من مصطلحات الوحدة (مثل: المعلومات الشخصية، العلامة الجغرافية، أخلاقيات المعلومات، حقوق المؤلف)، موضحًا مخاطرة وإجراءً وقائيًا واحدًا على الأقل.',
+model:'نشر صور الطلاب يكشف معلومات شخصية (الوجه واسم المدرسة)، وإذا حملت الصور علامة جغرافية فقد تكشف أماكن وجودهم، وهذا يعرضهم لانتحال الشخصية أو التنمر الإلكتروني. ومن ناحية أخلاقيات المعلومات يجب أخذ موافقة أولياء الأمور قبل النشر. الإجراء الوقائي: إزالة العلامة الجغرافية من الصور والنشر بموافقة كتابية فقط.',
+u:{sub:'تسليم وتصحيح',again:'إعادة الاختبار',prog:'تمت الإجابة',res:'نتيجة التصحيح التلقائي',ans:'الإجابة الصحيحة',fix:'التصحيح (إن وجد)',ph:'اكتب إجابتك...',model:'إجابة نموذجية',essay:'السؤال الرابع (8 درجات) يصححه المعلم — قارن إجابتك بالنموذج.',msg:['ممتاز! أنت جاهز للوحدة التالية.','جيد جدًا — راجع الأسئلة الخاطئة.','راجع مصطلحات الوحدة وأعد المحاولة.']}},
+en:{dir:'ltr',btn:'العربية',qn:'Q',title:'Unit 1 Exam — Studying Information',sub:'Programming & AI · Grade 1 Baccalaureate · 2026/2027',total:'Total: 40 marks',credit:'Content: Mr. Ahmed Tamer Saleh',
+secs:['Question 1 · Choose the correct answer','Question 2 · Mark (✓) or (✗) and correct any mistake','Question 3 · Complete the blanks','Question 4 · Essay question'],
+mk:['16 marks (2 each)','8 marks (2 each)','8 marks (2 each)','8 marks'],
+q1:[['Facts represented by numbers, letters or symbols are called:',['Information','Data','Knowledge','Media']],
+['The property meaning "once information is created it can never be fully erased" is:',['Dissemination','Replicability','Persistence','Media literacy']],
+['A USB flash drive is classified as which type of media?',['Expression','Transmission','Recording','Mass']],
+['Information you get from a third party, such as books and newspapers, is called:',['Primary','Secondary','Misleading','Raw']],
+['Latitude and longitude embedded in smartphone photos are called:',['Geotag','Cyberbullying','Impersonation','Cloud storage']],
+['Excessive internet use that disrupts your daily life is called:',['Cybercrime','Internet addiction','Social engineering','Leakage']],
+['A person pretending to be an individual or organization to steal passwords is committing:',['Information leakage','Cyberbullying','Impersonation','Dissemination']],
+['Accurately interpreting media information is the definition of:',['Information ethics','Media literacy','Cross-checking','Replicability']]],
+q2:['Images and texts are transmission media.','Information ethics apply to us only when laws exist.','Secondary information may differ from the original, so we use cross-checking.','It is fine to share others\' photos without their permission if they are available online.'],
+fix:['Expression media','Information ethics always apply, even without laws',0,'You must get the photo owners\' permission before sharing'],
+q3:[['_____ is information that has been analyzed and organized systematically to solve problems.','Knowledge'],['_____ are services that provide platforms for people to connect with each other online.','Social networking services'],['_____ is false information published deliberately, or baseless rumors.','Misinformation'],['_____ is disclosing personal information that should stay secret to a third party.','Personal information leakage']],
+q4:'Your school decided to post student photos from trips on its official page. Discuss this decision using at least three unit terms (e.g. personal information, geotag, information ethics, copyright), explaining at least one risk and one precautionary measure.',
+model:'Posting student photos reveals personal information (faces, the school name). If the photos carry a geotag, they can also reveal where students are, exposing them to impersonation or cyberbullying. Under information ethics, parents\' consent is needed before posting. Precaution: strip the geotag from photos and post only with written consent.',
+u:{sub:'Submit & grade',again:'Retake exam',prog:'answered',res:'Auto-graded score',ans:'Correct answer',fix:'Correction (if any)',ph:'Type your answer...',model:'Model answer',essay:'Question 4 (8 marks) is marked by your teacher — compare with the model answer.',msg:['Excellent! You are ready for the next unit.','Very good — review the questions you missed.','Review the unit terms and try again.']}}};
+const $=s=>document.querySelector(s);
+const esc=s=>s.replace(/[&<>"]/g,c=>'&#'+c.charCodeAt(0)+';');
+const N=s=>s.toLowerCase().replace(/[\u064B-\u065F\u0670\u0640]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي');
+const sum=a=>a.reduce((x,y)=>x+y,0);
+const blank=()=>({a1:Array(8).fill(-1),a2:Array(4).fill(-1),c2:Array(4).fill(''),a3:Array(4).fill(''),a4:''});
+let lang='ar',done=false,S=blank();
+function grade(){return{
+q1:S.a1.map((v,i)=>v==A1[i]?2:0),
+q2:S.a2.map((v,i)=>v!=T2[i]?0:T2[i]?2:1+(R2[i].test(N(S.c2[i]))?1:0)),
+q3:S.a3.map((v,i)=>R3[i].test(N(v))?2:0)}}
+function upd(){const n=S.a1.filter(v=>v>=0).length+S.a2.filter(v=>v>=0).length+S.a3.filter(x=>x.trim()).length+(S.a4.trim()?1:0);
+$('#pb').style.width=n/17*100+'%';$('#pl').textContent=n+'/17 '+D[lang].u.prog}
+function render(){
+const d=D[lang],u=d.u,R=done&&grade(),dis=done?'disabled':'',k=K[lang];
+const cls=ok=>R?(ok?' ok':' bad'):'';
+document.documentElement.lang=lang;document.documentElement.dir=d.dir;$('#lg').textContent=d.btn;
+let h=`<section class="hero"><h1>${d.title}</h1><p>${d.sub}</p><span class="chip">${d.total}</span></section>`;
+if(R){const t=sum(R.q1)+sum(R.q2)+sum(R.q3),p=t/32;
+h+=`<section class="card res"><div>${u.res}</div><div class="big">${t}<small>/32</small></div><p>${u.msg[p>=.9?0:p>=.7?1:2]}</p><p class="mut">${['q1','q2','q3'].map((x,i)=>d.qn+(i+1)+': '+sum(R[x])+'/'+(i?8:16)).join(' · ')}</p><p class="mut">${u.essay}</p></section>`}
+const head=i=>`<h2>${d.secs[i]}<span class="mk">${d.mk[i]}</span></h2>`;
+h+=`<section class="card">${head(0)}`+d.q1.map((q,i)=>`<div class="q${cls(R&&R.q1[i])}"><p><b>${i+1}.</b> ${q[0]}</p><div class="opts">`+q[1].map((o,j)=>`<label class="o${S.a1[i]==j?' on':''}"><input type="radio" name="a1_${i}" value="${j}" ${S.a1[i]==j?'checked':''} ${dis}><span class="k">${k[j]}</span>${o}</label>`).join('')+`</div>${R&&!R.q1[i]?`<div class="fb">✔ ${u.ans}: ${k[A1[i]]} — ${q[1][A1[i]]}</div>`:''}</div>`).join('')+'</section>';
+h+=`<section class="card">${head(1)}`+d.q2.map((q,i)=>`<div class="q${cls(R&&R.q2[i]==2)}"><p><b>${i+1}.</b> ${q}</p><div class="tf">${[1,0].map(v=>`<button data-tf="${i},${v}" class="${S.a2[i]==v?'on':''}" ${dis}>${v?'✓':'✗'}</button>`).join('')}</div><input class="txt" data-c2="${i}" placeholder="${u.fix}" value="${esc(S.c2[i])}" ${dis}>${R&&R.q2[i]<2?`<div class="fb">✔ ${u.ans}: ${T2[i]?'✓':'✗ — '+d.fix[i]}</div>`:''}</div>`).join('')+'</section>';
+h+=`<section class="card">${head(2)}`+d.q3.map((q,i)=>`<div class="q${cls(R&&R.q3[i])}"><p><b>${i+1}.</b> ${q[0]}</p><input class="txt" data-a3="${i}" placeholder="${u.ph}" value="${esc(S.a3[i])}" ${dis}>${R&&!R.q3[i]?`<div class="fb">✔ ${u.ans}: ${q[1]}</div>`:''}</div>`).join('')+'</section>';
+h+=`<section class="card">${head(3)}<p>${d.q4}</p><textarea class="txt" data-a4 placeholder="${u.ph}" ${dis}>${esc(S.a4)}</textarea>${R?`<div class="md"><b>${u.model}</b><br>${d.model}</div>`:''}</section>`;
+h+=done?`<button class="go" id="again">${u.again}</button>`:`<button class="go" id="sub">${u.sub}</button>`;
+h+=`<p class="mut ctr">${d.credit}</p>`;
+$('#app').innerHTML=h;upd()}
+const keep=f=>{const y=scrollY;f();render();scrollTo(0,y)};
+const app=$('#app');
+app.addEventListener('change',e=>{const t=e.target;if(t.name&&t.name.startsWith('a1_'))keep(()=>S.a1[+t.name.slice(3)]=+t.value)});
+app.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+if(b.dataset.tf){const[i,v]=b.dataset.tf.split(',');keep(()=>S.a2[i]=+v)}
+else if(b.id=='sub'){done=true;render();scrollTo(0,0)}
+else if(b.id=='again'){S=blank();done=false;render();scrollTo(0,0)}});
+app.addEventListener('input',e=>{const t=e.target,ds=t.dataset;
+if('c2'in ds)S.c2[ds.c2]=t.value;else if('a3'in ds)S.a3[ds.a3]=t.value;else if('a4'in ds)S.a4=t.value;upd()});
+$('#lg').onclick=()=>{lang=lang=='ar'?'en':'ar';keep(()=>0)};
+render();
+</script>
+</body>
+</html>
